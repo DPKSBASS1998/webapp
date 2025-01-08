@@ -1,0 +1,28 @@
+﻿@model IEnumerable<lab1.Models.User>
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h2>Список юзерів</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Оберіть юзера</h4>
+            <form asp-action="AddOrder" asp-controller="Shop" method="post">
+                <div class="form-group">
+                    <label for="userSelect">Юзери</label>
+                    <select id="userSelect" name="userId" class="form-control" required>
+                        <option value="" disabled selected>Оберіть користувача</option>
+                        @foreach (var user in Model)
+                        {
+                            <option value="@user.Id">@user.Username</option>
+                        }
+                    </select>
+                </div>
+                <input type="hidden" name="productId" value="@ViewBag.ProductId" />
+                <button type="submit" class="btn btn-primary mt-3">Підтвердити</button>
+            </form>
+        </div>
+    </div>
+</div>

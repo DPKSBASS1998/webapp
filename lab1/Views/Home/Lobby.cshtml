@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!doctype html>
+<html>
+<head>
+    <title>DNU</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container-sm {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-sm">
+        <div class="mb-3">
+            <form asp-action="Register" asp-controller="Account" method="get">
+                <button type="submit" class="btn btn-primary">
+                    Перейти на сторінку реєстрації
+                </button>
+            </form>
+
+        </div>
+        <div class="mb-3">
+            <label for="urlinfo" class="form-label">Запит для передачі данних з рядку запиту:</label>
+            <textarea class="form-control" id="urlinfo" rows="1" disabled readonly>
+            https://localhost:7046/Home/PersonInfo?name=John&age=30
+        </textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="urlinfo1" class="form-label">Запит для передачі данних об'єкту з рядку запиту:</label>
+            <textarea class="form-control" id="urlinfo1" rows="1" disabled readonly>
+            https://localhost:7046/Account/Register1?Username=JohnDoe&Email=johndoe@example.com&FullName=John+Doe&Password=12345
+        </textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="3lab">Перейти до lab3</label>
+            <form asp-action="lab3" asp-controller="Home" method="get">
+                <button id="3lab" class="btn btn-primary" type="submit">
+                    Перейти
+                </button>
+            </form>
+        </div>
+    </div>
+        
+</body>
+</html>

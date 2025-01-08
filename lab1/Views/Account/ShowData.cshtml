@@ -1,0 +1,68 @@
+﻿@model List<lab1.Models.User>
+@{
+    Layout = "_Layout";
+
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юзерліст</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Список юзерів</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Оберіть юзера</h4>
+            <form asp-action="ShowData" asp-controller="Account" method="get">
+                <div class="form-group">
+                    <label for="userSelect">Юзери</label>
+                    <select id="userSelect" name="userId" class="form-control" required>
+                            <option value="" disabled selected> Оберіть користувача </option>
+                            @foreach (var user in Model)
+                            {
+                                <option value="@user.Id"> @user.Username </option>
+                            }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Підтвердити</button>
+            </form>
+        </div>
+        <div class="col-md-8">
+                <h4>Деталі юзера</h4>
+                @if (ViewBag.SelectedUser != null)
+                {
+                    var user = ViewBag.SelectedUser as lab1.Models.User;
+                    <div class="list-group">
+                        <li class="list-group-item">
+                            <strong>Логин:</strong> @user.Username<br>
+                            <strong>Email:</strong> @user.Email<br>
+                            <strong>Имя:</strong> @user.FullName<br>
+                        </li>
+                    </div>
+
+                    
+                    <form asp-action="DeleteUser" asp-controller="Account" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-danger mt-3">Видалити</button>
+                    </form>
+
+                    
+                    <a href="@Url.Action("EditUser", "Account", new { id = user.Id })" class="btn btn-warning mt-3">Редагувати</a>
+                }
+                else
+                {
+                    <p>Будь ласка, виберіть юзера, щоб побачити деталі.</p>
+                }
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿@{
+    Layout = "_Layout";
+    var hello = "передача однорядкових виразів та блоків коду;";
+    int hour = DateTime.Now.Hour;
+    var fruits = new List<string> { "Яблуко", "Банан", "Вишня" };
+    string choose = "";
+    var numbers = new List<int> { 1, 2, 3, 4, 5 };
+    int count = 0;
+    var name = "Владислав";
+
+}
+@functions {
+    public string GetGreeting(string name)
+    {
+        return $"Привіт, {name}!";
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання до лаб3</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="mb-3">
+        <label for="1task" class="form-label">Передача однорядкових виразів та блоків коду;</label>
+        <textarea class="form-control" id="1task" rows="2" disabled readonly>
+            @hello
+            Сьогоднішня дата: @DateTime.Now.ToShortDateString()
+        </textarea>
+    </div>
+    
+    @if (hour < 12)
+    {
+        choose = "Доброго ранку!";
+    }
+    else if (hour < 18)
+    {
+        choose = "Доброго дня!";
+    }
+    else
+    {
+        choose = "Доброго вечора!";
+    }
+    <div class="mb-3">
+        <label for="task2" class="form-label">
+            Умовні конструкції
+        </label>
+        <textarea class="form-control" id="task2" rows="1" disabled readonly>
+            @choose
+        </textarea>
+    </div>
+
+
+    <div class="mb-3">
+        <label for="task3" class="form-label">
+            Список фруктів через foreach:
+        </label>
+        <textarea class="form-control" id="task3" rows="@fruits.Count" disabled readonly>
+            @foreach (var fruit in fruits)
+            {
+                @fruit;
+                @Environment.NewLine;
+
+            }
+    </textarea>
+    </div>
+
+
+    <div class="mb-3">
+        <label for=" " class="form-label">
+            Цикл for:
+        </label>
+        <textarea class="form-control" id="task32" rows="@numbers.Count" disabled readonly>
+            @for (int i = 0; i < numbers.Count; i++)
+            {
+                @numbers[i]
+                @Environment.NewLine;
+            }
+    </textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="task33" class="form-label">
+            Цикл while
+        </label>
+        <textarea class="form-control" id="task33" rows="5" disabled readonly>
+            @while (count < 5)
+            {
+                count++;
+                @count;
+                @Environment.NewLine;
+            }
+    </textarea>
+    </div>
+
+
+    <div class="mb-3">
+        <label for="task4" class="form-label">
+            Функції:
+        </label>
+        <textarea class="form-control" id="task4" rows="1" disabled readonly>
+            @GetGreeting(name);
+    </textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for=" " class="form-label">
+
+        </label>
+        <textarea class="form-control" id=" " rows="1" disabled readonly>
+
+    </textarea>
+    </div>
+
+</body>
+</html>

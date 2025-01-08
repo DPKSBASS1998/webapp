@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "_Layout";
+
+
+}
+<!doctype html>
+<html>
+<head>
+    <title>DNU</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* Главный контейнер для карусели */
+        .carousel-container {
+            width: 80%;
+            height: 80vh; /* Высота 80% от экрана */
+            margin: auto; /* Центрирует карусель по вертикали */
+        }
+
+        /* Устанавливаем карусель на всю высоту контейнера */
+        .carousel, .carousel-inner, .carousel-item {
+            width: 100%;
+            height: 100%;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Фиксируем страницу */
+        }
+        .carousel-item{
+           
+            justify-content: center; /* Центрує по горизонталі */
+            align-items: center; /* Центрує по вертикалі */
+        }
+
+        /* Настраиваем отображение карусельных изображений */
+            .carousel-item img {
+                width: 100%; /* Зображення займає всю ширину контейнера */
+                height: 100%; /* Зображення займає всю висоту контейнера */
+                object-fit: cover; /* Зображення покриває весь контейнер, обрізається по краях */
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="carousel-container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://hator.gg/wp-content/uploads/products/keyboards/rockfall-2-tkl-mecha/rockfall-2-tkl-mecha-1.jpg" alt="Slide 1">
+                    
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.ytimg.com/vi/V8uhR4Jq3kQ/maxresdefault.jpg" alt="Slide 2">
+                    
+                </div>
+                <div class="carousel-item">
+                    <img src="https://allegro.stati.pl/AllegroIMG/PRODUCENCI/STEELSERIES/64626/SteelSeries_Apex_PRO_5.jpg" alt="Slide 3">
+                    
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

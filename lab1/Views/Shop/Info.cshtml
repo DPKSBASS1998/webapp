@@ -1,0 +1,31 @@
+﻿@model Product
+@using lab1.Models
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <!-- Зображення продукту зліва -->
+        <div class="col-md-4">
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="product-image" style="width: 100%; border-radius: 8px;">
+        </div>
+
+        <!-- Інформація про продукт справа -->
+        <div class="col-md-8">
+            <h2>@Model.Name</h2>
+            <p><strong>Опис:</strong> @Model.Description</p>
+
+            <!-- Рядок з ціною і кнопкою -->
+            <div class="d-flex align-items-center mt-3">
+                <p class="me-3"><strong>Ціна:</strong> @Model.Price грн</p>
+                <form asp-action="SelectUser" asp-controller="Shop" method="get">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-success me-2">У кошик</button>
+                </form>
+                <a asp-controller="Shop" asp-action="Katalog" class="btn btn-primary">В каталог</a>
+            </div>
+        </div>
+    </div>
+</div>
+

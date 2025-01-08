@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Реєстрація</h2>
+        <form asp-action="Register" asp-controller="Account" method="post">
+            <div class="form-group">
+                <label for="username">Логін</label>
+                <input type="text" class="form-control" id="username" name="Username" placeholder="Введіть логін" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Електронна пошта</label>
+                <input type="email" class="form-control" id="email" name="Email" placeholder="Введіть email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fullname">Ім'я</label>
+                <input type="text" class="form-control" id="fullname" name="FullName" placeholder="Введіть ім'я" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" class="form-control" id="password" name="Password" placeholder="Введіть пароль" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Зареєструватися</button>
+        </form>
+    </div>
+
+</body>
+</html>

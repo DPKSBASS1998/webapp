@@ -1,0 +1,109 @@
+﻿@model lab1.Models.OrderWithProductsViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Ваш кошик</h2>
+
+    @if (!Model.Orders.Any())
+    {
+        <div class="alert alert-info text-center">Кошик порожній.</div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var order in Model.Orders)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">Замовлення #@order.Id</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>ID Користувача:</strong> @order.UserId</p>
+                            <p><strong>Товари:</strong></p>
+                            <ul>
+                                @{
+                                    var productIds = order.ProductIds
+                                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                    .GroupBy(id => id)
+                                    .Select(g => new { Id = g.Key, Count = g.Count() });
+
+                                    decimal orderTotal = 0;
+
+                                    foreach (var product in productIds)
+                                    {
+                                        var productData = Model.Products.FirstOrDefault(p => p.Id.ToString() == product.Id);
+                                        if (productData != null)
+                                        {
+                                            var productPrice = productData.Price * product.Count;
+                                            orderTotal += productPrice;
+
+                                            <li class="d-flex align-items-center">
+                                                <img src="@productData.ImageUrl" alt="@productData.Name" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;">
+                                                <span class="mx-3">@productData.Name</span>
+                                                <span class="text-muted mx-2">(@productData.Price ₴ × @product.Count)</span>
+                                                <span class="mx-2">= @productPrice ₴</span>
+                                                <div class="d-flex mt-2 ml-auto">
+                                                    @if (!order.IsDelivered)
+                                                    {
+                                                        <form asp-action="UpdateOrder" asp-controller="Shop" method="post" class="d-inline">
+                                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                                            <input type="hidden" name="productId" value="@product.Id" />
+                                                            <input type="hidden" name="action" value="decrease" />
+                                                            <button type="submit" class="btn btn-sm btn-outline-secondary">-</button>
+                                                        </form>
+                                                    }
+                                                    <span class="mx-2">@product.Count</span>
+                                                    @if (!order.IsDelivered)
+                                                    {
+                                                        <form asp-action="UpdateOrder" asp-controller="Shop" method="post" class="d-inline">
+                                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                                            <input type="hidden" name="productId" value="@product.Id" />
+                                                            <input type="hidden" name="action" value="increase" />
+                                                            <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+                                                        </form>
+                                                    }
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                            <p><strong>Загальна кількість товарів:</strong> @productIds.Sum(p => p.Count)</p>
+                            <p><strong>Загальна сума:</strong> @orderTotal ₴</p>
+                            <p>
+                                <strong>Статус:</strong>
+                                @if (order.IsDelivered)
+                                {
+                                    <span class="badge bg-success">Доставлено</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">Не доставлено</span>
+                                }
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            @if (!order.IsDelivered)
+                            {
+                                <form asp-action="Deliver" asp-controller="Shop" method="post" style="margin-right: 10px;">
+                                    <input type="hidden" name="id" value="@order.Id" />
+                                    <button type="submit" class="btn btn-success btn-sm">Доставити</button>
+                                </form>
+                            }
+
+                            <!-- Кнопка для видалення замовлення -->
+                            <form asp-action="DeleteOrder" asp-controller="Shop" method="post" style="margin-left: 10px;">
+                                <input type="hidden" name="id" value="@order.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Видалити</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

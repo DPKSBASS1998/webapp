@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати продукт</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Додати продукт</h2>
+        <form asp-action="ProductListEditor" asp-controller="Admin" method="post">
+            <div class="form-group">
+                <label for="name">Назва продукту</label>
+                <input type="text" class="form-control" id="name" name="Name" placeholder="Введіть назву продукту" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Опис продукту</label>
+                <textarea class="form-control" id="description" name="Description" rows="3" placeholder="Введіть опис продукту" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="imageUrl">Посилання на зображення</label>
+                <input type="text" class="form-control" id="imageUrl" name="ImageUrl" placeholder="Вставте URL зображення" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Ціна</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="Price" placeholder="Введіть ціну продукту" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Додати продукт</button>
+        </form>
+    </div>
+
+</body>
+</html>
